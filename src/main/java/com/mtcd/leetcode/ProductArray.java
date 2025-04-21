@@ -28,7 +28,6 @@ public class ProductArray {
         int[] result = new int[s];
         for (int i = 0; i < ints.length; i++) {
             result[i] = pres[i] * posts[i];
-            System.out.println(i + ", " + pres[i] + ", " + posts[i]);
         }
         return result;
     }
