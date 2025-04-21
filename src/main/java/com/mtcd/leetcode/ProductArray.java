@@ -15,21 +15,16 @@ public class ProductArray {
         int[] pres = new int[s];
         pres[0] = 1;
 
-        int[] posts = new int[s];
-        posts[posts.length - 1] = 1;
-
         for (int i = 1; i < s; i++) {
             pres[i] = ints[i - 1] * pres[i - 1];
         }
-        for (int i = s - 2; i >= 0; i--) {
-            posts[i] = ints[i + 1] * posts[i + 1];
-        }
 
-        int[] result = new int[s];
-        for (int i = 0; i < ints.length; i++) {
-            result[i] = pres[i] * posts[i];
+        int post = 1;
+        for (int i = s - 1; i >= 0; i--) {
+            pres[i] = pres[i] * post;
+            post = post * ints[i];
         }
-        return result;
+        return pres;
     }
 
     public static void main(String[] args) {
