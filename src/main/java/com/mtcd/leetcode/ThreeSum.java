@@ -14,7 +14,6 @@ public class ThreeSum {
         Arrays.sort(ints);
         int right = 0;
         int left = ints.length - 1;
-        // -4, -1, -1, 0, 2, 3
         for (int i = 0; i < ints.length && ints[i] <= target; i++) {
             if (i == 0 || ints[i] != ints[i - 1]) {
                 Collection<List<Integer>> twoSums = twoSum(ints, i + 1,
@@ -57,7 +56,10 @@ public class ThreeSum {
         int[] input = new int[]{-1, 0, 2, 3, -1, -4};
         List<List<Integer>> result = subTripletsWhichSum(input, 4);
         for (List<Integer> threeSum : result) {
-            System.out.println(threeSum.stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            System.out.println(threeSum
+                    .stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", ")));
         }
     }
 }
