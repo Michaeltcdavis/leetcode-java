@@ -13,6 +13,7 @@ public class ClimbingStairs {
         int twos = 1;
         for (int i = n - 1; i >= minSteps; i--) {
             result += factorial(i) / (factorial(twos) * factorial(i - twos));
+            twos++;
         }
         return result;
     }
