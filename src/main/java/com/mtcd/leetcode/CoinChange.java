@@ -9,20 +9,18 @@ public class CoinChange {
         Arrays.fill(amt, total + 1);
         amt[0] = 0;
         for (int i = 1; i <= total; i++) {
-            int min = total + 1;
             for (int val : coinValues) {
                 if (i - val < 0)
                     continue;
                 else
-                    min = Math.min(min, 1 + amt[i - val]);
+                    amt[i] = Math.min(amt[i], 1 + amt[i - val]);
             }
-            amt[i] = min;
         }
         return amt[total] == (total + 1) ? -1 : amt[total];
     }
 
     public static void main(String[] args) {
         int[] coinValues = new int[]{1, 3, 5, 6};
-        System.out.println(leastCoinsUsed(coinValues, 9));
+        System.out.println(leastCoinsUsed(coinValues, 8));
     }
 }
