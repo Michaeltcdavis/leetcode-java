@@ -1,6 +1,9 @@
 package com.mtcd.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class LongestSubsequence {
 
@@ -20,8 +23,25 @@ public class LongestSubsequence {
         return max;
     }
 
+    public static int longestIncreasingSubSequenceBS(int[] ints) {
+        int size = ints.length;
+        List<Integer> result = new ArrayList<>();
+        result.add(ints[0]);
+        for (int i = 1; i < size; i++) {
+            if (ints[i] > result.get(result.size() - 1)) {
+                result.add(ints[i]);
+            } else {
+                int search = Collections.binarySearch(result, ints[i]);
+                if (search < 0)
+                    search = -(search + 1);
+                result.set(search, ints[i]);
+            }
+        }
+        return result.size();
+    }
+
     public static void main(String[] args) {
         int[] input = new int[]{10, 7, 8, 3, 16, 27, 1};
-        System.out.println(longestIncreasingSubSequence(input));
+        System.out.println(longestIncreasingSubSequenceBS(input));
     }
 }
