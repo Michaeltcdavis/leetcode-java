@@ -10,13 +10,11 @@ public class LongestSubsequence {
         Arrays.fill(subs, 1);
 
         for (int i = 1; i < ints.length; i++) {
-            int localMax = 0;
             for (int j = i - 1; j >= 0; j--) {
                 if (ints[j] < ints[i]) {
-                    localMax = Math.max(localMax, subs[j]);
+                    subs[i] = Math.max(subs[i], subs[j] + 1);
                 }
             }
-            subs[i] = localMax + 1;
             max = Math.max(max, subs[i]);
         }
         return max;
