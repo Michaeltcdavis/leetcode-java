@@ -1,63 +1,61 @@
 package com.mtcd.leetcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ThreeSum {
 
-    public static Set<List<Integer>> subTripletsWhichSum(int[] ints,
-                                                         int target) {
-        List<Integer> used = new ArrayList<>();
-        Set<List<Integer>> trips = new HashSet<>();
-        for (int i : ints) {
-            int remainder = target - i;
-            List<List<Integer>> twoSums = twoSum(used, remainder);
-            for (List<Integer> pair : twoSums) {
-                pair.add(i);
-                Collections.sort(pair);
-                trips.add(pair);
+    public static List<List<Integer>> subTripletsWhichSum(int[] ints,
+                                                          int target) {
+        List<List<Integer>> triplets = new ArrayList<>();
+        Arrays.sort(ints);
+        int right = 0;
+        int left = ints.length - 1;
+        // -4, -1, -1, 0, 2, 3
+        for (int i = 0; i < ints.length && ints[i] <= target; i++) {
+            if (i == 0 || ints[i] != ints[i - 1]) {
+                Collection<List<Integer>> twoSums = twoSum(ints, i + 1,
+                        target - ints[i]);
+                for (List<Integer> twoSum : twoSums)
+                    triplets.add(add(twoSum, ints[i]));
             }
-            used.add(i);
         }
-        return trips;
+        return triplets;
     }
 
-    private static List<List<Integer>> twoSum(List<Integer> ints,
-                                              int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        for (int i : ints) {
-            int remainder = target - i;
-            if (ints.contains(remainder) && notSameNum(i, remainder, ints)) {
-                List<Integer> twoSum = list(i, remainder);
-                result.add(twoSum);
-            }
-        }
+    private static List<Integer> add(List<Integer> intList, int anInt) {
+        List<Integer> result = new ArrayList<>();
+        result.addAll(intList);
+        result.add(anInt);
         return result;
     }
 
-    private static boolean notSameNum(int i, int remainder, List<Integer> ints) {
-        return i == remainder ? hasMultiple(ints, i) : true;
-    }
+    private static Collection<List<Integer>> twoSum(int[] ints, int start,
+                                                    int target) {
+        Collection<List<Integer>> sums = new ArrayList<>();
+        for (int i = start; i < ints.length - 1; i++) {
+            if (ints[i] == ints[i - 1] && i != start)
+                continue;
 
-    private static boolean hasMultiple(List<Integer> ints, int i) {
-        int count = 0;
-        for (int in : ints) {
-            if (in == i)
-                count++;
+            int remainder = target - ints[i];
+            for (int j = i + 1; j < ints.length; j++) {
+                if (ints[j] == ints[j - 1] && ints[j] != ints[i])
+                    continue;
+                if (ints[j] > remainder)
+                    break;
+                if (ints[j] == remainder)
+                    sums.add(Arrays.asList(ints[i], ints[j]));
+            }
         }
-        return count > 1;
-    }
-
-    private static List<Integer> list(int... ints) {
-        List<Integer> list = new ArrayList<>();
-        for (int i : ints)
-            list.add(i);
-        return list;
+        return sums;
     }
 
     public static void main(String[] args) {
         int[] input = new int[]{-1, 0, 2, 3, -1, -4};
-        Set<List<Integer>> result = subTripletsWhichSum(input, 0);
+        List<List<Integer>> result = subTripletsWhichSum(input, 4);
         for (List<Integer> threeSum : result) {
             System.out.println(threeSum.stream().map(String::valueOf).collect(Collectors.joining(", ")));
         }
