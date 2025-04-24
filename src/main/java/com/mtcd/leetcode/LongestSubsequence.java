@@ -40,8 +40,32 @@ public class LongestSubsequence {
         return result.size();
     }
 
+    public static int longestCommonSubsequenceDP(String text1, String text2) {
+        //    J O H N ø
+        // R  2 2 1 1 0
+        // O  2 2 1 1 0
+        // N  1 1 1 1 0
+        // ø  0 0 0 0 0
+        int[][] matrix = new int[text1.length() + 1][text2.length() + 1];
+
+        for (int i = text1.length() - 1; i >= 0; i--) {
+            for (int j = text2.length() - 1; j >= 0; j--) {
+                if (text1.charAt(i) == text2.charAt(j)) {
+                    // if there is a match, take diagonal value + 1
+                    matrix[i][j] = matrix[i + 1][j + 1] + 1;
+                } else {
+                    // if no match, take highest adjacent value
+                    matrix[i][j] = Math.max(matrix[i + 1][j], matrix[i][j + 1]);
+                }
+            }
+        }
+        return matrix[0][0];
+    }
+
     public static void main(String[] args) {
         int[] input = new int[]{10, 7, 8, 3, 16, 27, 1};
         System.out.println(longestIncreasingSubSequenceBS(input));
+
+        System.out.println(longestCommonSubsequenceDP("abcde", "ace"));
     }
 }
