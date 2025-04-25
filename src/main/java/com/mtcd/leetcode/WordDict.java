@@ -30,9 +30,8 @@ public class WordDict {
 
         for (int i = 0; i < word.length(); i++) {
             for (int j = 0; j <= i; j++) {
-                if (cache[j] = true)
-                    if (dictionary.contains(word.substring(j, i + 1)))
-                        cache[i + 1] = true;
+                if (cache[j] = true && dictionary.contains(word.substring(j, i + 1)))
+                    cache[i + 1] = true;
             }
         }
         return cache[word.length()];
