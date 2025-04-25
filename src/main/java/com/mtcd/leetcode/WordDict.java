@@ -1,5 +1,9 @@
 package com.mtcd.leetcode;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class WordDict {
 
     /**
@@ -22,30 +26,16 @@ public class WordDict {
         boolean[] cache = new boolean[word.length() + 1];
         cache[0] = true;
 
+        Set<String> dictionary = new HashSet<>(Arrays.asList(dicts));
+
         for (int i = 0; i < word.length(); i++) {
             for (int j = 0; j <= i; j++) {
                 if (cache[j] = true)
-                    for (String dict : dicts) {
-                        if (subStringMatches(word, j + 1, i + 1, dict)) {
-                            cache[i + 1] = true;
-                        }
-                    }
+                    if (dictionary.contains(word.substring(j, i + 1)))
+                        cache[i + 1] = true;
             }
         }
         return cache[word.length()];
-    }
-
-    private static boolean subStringMatches(String superString, int start,
-                                            int end,
-                                            String substring) {
-        if (substring.length() != end - start)
-            return false;
-
-        for (int i = start; i < end; i++) {
-            if (superString.charAt((i)) != substring.charAt(i - start))
-                return false;
-        }
-        return true;
     }
 
     public static void main(String[] args) {
