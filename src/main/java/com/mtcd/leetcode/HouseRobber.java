@@ -1,5 +1,7 @@
 package com.mtcd.leetcode;
 
+import java.util.Arrays;
+
 public class HouseRobber {
     /**
      * Returns the largest sum possible not using adjacent values
@@ -22,8 +24,16 @@ public class HouseRobber {
         return max;
     }
 
+    public static int maxNonAdjacentCircleSum(int[] vals) {
+        int oneMax = maxNonAdjacentSum(Arrays.copyOfRange(vals, 0,
+                vals.length - 1));
+        int twoMax = maxNonAdjacentSum(Arrays.copyOfRange(vals, 1,
+                vals.length));
+        return Math.max(oneMax, twoMax);
+    }
+
     public static void main(String[] args) {
-        int[] input = new int[]{2, 4, 3, 9, 11, 2};
-        System.out.println(maxNonAdjacentSum(input));
+        int[] input = new int[]{1, 2, 15, 11, 3, 6, 10};
+        System.out.println(maxNonAdjacentCircleSum(input));
     }
 }
