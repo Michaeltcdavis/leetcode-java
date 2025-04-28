@@ -3,10 +3,6 @@ package com.mtcd.leetcode;
 public class DecodeWays {
 
     public static int waysToDecode(String s) {
-        // initialize "max" as 1
-        // for each num in nums after index 0
-        // if != 0, max + 1
-        // if prev = 1 or 2 and current < 7, max + 1,
         int prev = Character.getNumericValue(s.charAt(0));
         if (prev == 0)
             return 0; // no way to decode leading zero
