@@ -17,11 +17,12 @@ public class DecodeWays {
             int current = Character.getNumericValue(s.charAt(i));
 
             if (current == 0) {
-                if (prev == 0)
+                if (prev == 0 || prev > 2)
                     return 0;
-                else if (prevFree)
+                else if (prevFree) {
                     max--;
-                prevFree = false;
+                    prevFree = false;
+                }
             } else if (prevFree) {
                 max++;
             } else if (prev == 1 || prev == 2 && current < 7) {
@@ -35,7 +36,7 @@ public class DecodeWays {
     }
 
     public static void main(String[] args) {
-        String s = "12024";
+        String s = "897078";
         System.out.println(waysToDecode(s));
     }
 }
