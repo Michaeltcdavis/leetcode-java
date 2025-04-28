@@ -8,7 +8,7 @@ public class DecodeWays {
         // if != 0, max + 1
         // if prev = 1 or 2 and current < 7, max + 1,
         int max = 1;
-        int prev = Integer.valueOf(0);
+        int prev = Integer.valueOf(s.charAt(0));
         for (int i = 1; i < s.length(); i++) {
             int current = Integer.valueOf(s.charAt(i));
 
