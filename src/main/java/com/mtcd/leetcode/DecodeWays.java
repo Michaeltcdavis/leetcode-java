@@ -8,7 +8,10 @@ public class DecodeWays {
         // if != 0, max + 1
         // if prev = 1 or 2 and current < 7, max + 1,
         int prev = Character.getNumericValue(s.charAt(0));
-        int max = prev == 0 ? 0 : 1;
+        if (prev == 0)
+            return 0; // no way to decode leading zero
+
+        int max = 1;
         for (int i = 1; i < s.length(); i++) {
             int current = Character.getNumericValue(s.charAt(i));
 
@@ -24,7 +27,7 @@ public class DecodeWays {
     }
 
     public static void main(String[] args) {
-        String s = "06";
+        String s = "12";
         System.out.println(waysToDecode(s));
     }
 }
