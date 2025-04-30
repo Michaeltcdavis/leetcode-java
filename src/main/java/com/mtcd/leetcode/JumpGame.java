@@ -3,18 +3,21 @@ package com.mtcd.leetcode;
 public class JumpGame {
 
     public static boolean canReachLast(int[] ints) {
-        // initialize array of length ints with 0=true
-        // iterate through from start
-        //if ints[i] = true, then make all accessible ints true
-        // find next true int and follow the same
-        boolean[] canReach = new boolean[ints.length];
-        canReach[0] = true;
-        for (int i = 0; i < ints.length; i++) {
-            if (canReach[i] == true)
-                for (int j = i + 1; j <= i + ints[i] && j < ints.length; j++)
-                    canReach[j] = true;
+        // keep record of available steps (int)
+        // for each int, reduce available steps by 1
+        //      if current steps greater than available, avail = current
+        // if avail = 0 return false, else return true
+        int avail = ints[0];
+        for (int i = 1; i < ints.length; i++) {
+            avail--;
+
+            if (ints[i] > avail)
+                avail = ints[i];
+
+            if (avail == 0)
+                return false;
         }
-        return canReach[ints.length - 1];
+        return true;
     }
 
     public static void main(String[] args) {
