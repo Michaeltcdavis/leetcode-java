@@ -16,8 +16,7 @@ public class JumpGame {
             if (i > reachable)
                 return false;
 
-            if (i + ints[i] > reachable)
-                reachable = i + ints[i];
+            reachable = Math.max(i + ints[i], reachable);
 
             if (reachable >= ints.length - 1)
                 return true;
