@@ -2,20 +2,25 @@ package com.mtcd.leetcode;
 
 public class JumpGame {
 
+    /**
+     * Determines if the last index of an array of ints can be reached from the
+     * first index, if the number of forward index movements from each position
+     * is determined by the value of each int in the array.
+     *
+     * @param ints the array of possible movements (jumps) from each position
+     * @return true if possible to reach the last index, otherwise false
+     */
     public static boolean canReachLast(int[] ints) {
-        // keep record of available steps (int)
-        // for each int, reduce available steps by 1
-        //      if current steps greater than available, avail = current
-        // if avail = 0 return false, else return true
-        int avail = ints[0];
-        for (int i = 1; i < ints.length; i++) {
-            avail--;
-
-            if (ints[i] > avail)
-                avail = ints[i];
-
-            if (avail == 0)
+        int reachable = ints[0];
+        for (int i = 0; i < ints.length; i++) {
+            if (i > reachable)
                 return false;
+
+            if (i + ints[i] > reachable)
+                reachable = i + ints[i];
+
+            if (reachable >= ints.length - 1)
+                return true;
         }
         return true;
     }
