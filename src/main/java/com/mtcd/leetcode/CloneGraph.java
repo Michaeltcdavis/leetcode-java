@@ -84,7 +84,9 @@ public class CloneGraph {
         }
 
         private String print(List<Node> neighbours) {
-            return "[" + neighbours.stream().map(n -> String.valueOf(n.val)).collect(Collectors.joining(",")) + "]";
+            return "[" + neighbours.stream()
+                    .map(n -> String.valueOf(n.val))
+                    .collect(Collectors.joining(",")) + "]";
         }
     }
 }
