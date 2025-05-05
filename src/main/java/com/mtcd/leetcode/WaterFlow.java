@@ -51,7 +51,7 @@ public class WaterFlow {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (pacificDrainers[i][j] && atlanticDrainers[i][j]) {
-                    result.add(Arrays.asList(i, j));
+                    result.add(List.of(i, j));
                 }
             }
         }
