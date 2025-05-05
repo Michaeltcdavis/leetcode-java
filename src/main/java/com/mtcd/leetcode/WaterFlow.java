@@ -59,12 +59,12 @@ public class WaterFlow {
     }
 
     public static void main(String[] args) {
-        int[] row1 = new int[]{1, 2, 2, 3, 5};
-        int[] row2 = new int[]{3, 2, 3, 4, 4,};
-        int[] row3 = new int[]{2, 4, 5, 3, 1};
-        int[] row4 = new int[]{6, 7, 1, 4, 5};
-        int[] row5 = new int[]{5, 1, 1, 2, 4};
-        int[][] input = new int[][]{row1, row2, row3, row4, row5};
+        int[][] input = new int[][]{
+                {1, 2, 2, 3, 5},
+                {3, 2, 3, 4, 4,},
+                {2, 4, 5, 3, 1},
+                {6, 7, 1, 4, 5},
+                {5, 1, 1, 2, 4}};
         List<List<Integer>> result = flowToBothOceans(input);
         for (List<Integer> coord : result) {
             System.out.println(coord.get(0) + ", " + coord.get(1));
