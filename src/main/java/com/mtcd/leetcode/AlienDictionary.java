@@ -1,5 +1,7 @@
 package com.mtcd.leetcode;
 
+import com.google.common.collect.Maps;
+
 import java.util.*;
 
 public class AlienDictionary {
@@ -14,7 +16,7 @@ public class AlienDictionary {
         //           otherwise return false
         // if added,
 
-        HashMap<Character, List<Character>> letter2lesser = new HashMap<>();
+        HashMap<Character, List<Character>> letter2lesser = Maps.newHashMap();
         for (String word : words) {
             for (char c : word.toCharArray()) {
                 letter2lesser.putIfAbsent(c, new ArrayList<>());
@@ -33,7 +35,7 @@ public class AlienDictionary {
         }
 
         Set<Character> letters = letter2lesser.keySet();
-        Map<Character, Boolean> visited = new HashMap<>();
+        Map<Character, Boolean> visited = Maps.newHashMap();
         StringBuilder result = new StringBuilder();
         for (Character c : letters) {
             boolean res = dfs(c, result, letter2lesser, visited);
